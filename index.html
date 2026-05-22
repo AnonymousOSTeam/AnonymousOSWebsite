@@ -2,19 +2,197 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AnonymousOS Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnonymousOS // Elite Security Portal</title>
     <style>
-        body {
-            background-color: #0d0d0d;
-            color: #00ff33; /* Distinct hacker green */
-            font-family: 'Courier New', Courier, monospace;
-            padding: 50px;
+        :root {
+            --glow-color: #00ff33;
+            --bg-color: #0a0a0a;
+            --panel-bg: #121212;
+            --text-main: #ffffff;
+            --text-dim: #888888;
         }
-        h1 { color: #ffffff; }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: hidden;
+            padding: 40px 20px;
+        }
+
+        /* Matrix Scanline Effect Overlay */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            opacity: 0.4;
+            pointer-events: none;
+            background-size: 100% 4px, 6px 100%;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Glitch Header */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px double var(--glow-color);
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px var(--glow-color);
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--glow-color);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Main Terminal Interface Display */
+        .terminal-box {
+            background-color: var(--panel-bg);
+            border: 1px solid #333;
+            border-top: 25px solid #222;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 15px rgba(0, 255, 51, 0.1);
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        /* Fake Terminal Window Controls */
+        .terminal-box::before {
+            content: "● ● ●";
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            color: #555;
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+
+        .terminal-box::after {
+            content: "core_init_daemon // active";
+            position: absolute;
+            top: -22px;
+            right: 15px;
+            color: #666;
+            font-size: 11px;
+        }
+
+        .log-line {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .status-ok { color: var(--glow-color); font-weight: bold; }
+        .status-warn { color: #ffcc00; }
+
+        /* Tech Grid Section */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .module-card {
+            background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%);
+            border: 1px solid #252525;
+            padding: 25px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .module-card:hover {
+            border-color: var(--glow-color);
+            box-shadow: 0 0 15px rgba(0, 255, 51, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .module-card h3 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--glow-color);
+            padding-left: 10px;
+        }
+
+        .module-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #444;
+            font-size: 0.85rem;
+            border-top: 1px dashed #222;
+            padding-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to the AnonymousOS Project</h1>
-    <p>A custom, lightweight, security-focused ecosystem built from scratch.</p>
+
+<div class="container">
+    <header>
+        <h1>AnonymousOS</h1>
+        <div class="subtitle">// Next-Gen Security Architecture</div>
+    </header>
+
+    <div class="terminal-box">
+        <div class="log-line"><span class="status-ok">[ LOAD ]</span> Initializing platform stack infrastructure...</div>
+        <div class="log-line"><span class="status-ok">[ LOAD ]</span> Mounting native core environment vectors...</div>
+        <div class="log-line"><span class="status-ok">[ OK   ]</span> Cryptographic signing subroutines configured.</div>
+        <div class="log-line"><span class="status-ok">[ OK   ]</span> Remote synchronization via authenticated deployment hooks established.</div>
+        <div class="log-line"><span class="status-warn">[ INFO ]</span> Deployment target set to isolated system framework layers.</div>
+        <div class="log-line"><span class="status-ok">[ READY]</span> System online. Awaiting automated execution modules.</div>
+    </div>
+
+    <div class="grid-layout">
+        <div class="module-card">
+            <h3>Custom Framework</h3>
+            <p>Engineered entirely from the ground up. Optimized directly for bare-metal runtime execution parameters, minimizing operational footprints completely.</p>
+        </div>
+
+        <div class="module-card">
+            <h3>Ecosystem Automation</h3>
+            <p>Driven by specialized processing syntax designed to configure environments, initialize rulesets, and manage testing frameworks at execution initialization.</p>
+        </div>
+
+        <div class="module-card">
+            <h3>Integrated Toolset</h3>
+            <p>Houses native low-level implementations for localized reconnaissance audits, packet data traffic monitoring, and algorithmic integrity evaluations.</p>
+        </div>
+    </div>
+
+    <footer>
+        [ PROJECT PORTAL VERSION 1.0.0 // ENCRYPTED SESSION ]
+    </footer>
+</div>
+
 </body>
 </html>
